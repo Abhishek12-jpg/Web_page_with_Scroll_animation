@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dewDrive — Privacy-First macOS Backup & Recovery</title>
+  <meta name="description" content="dewDrive encrypts every file before it leaves your Mac, keeps it in the storage you choose, and brings any version back in one click. Zero vendor lock-in.">
+  <meta name="keywords" content="macOS backup, restic mac, kopia mac, encrypted backup, s3 backup mac, time machine alternative, zero knowledge backup">
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="dewDrive — Privacy-First macOS Backup & Recovery">
+  <meta property="og:description" content="Serious storage, effortless recovery. Client-side encrypted snapshots to any storage with zero vendor lock-in.">
+  <meta name="theme-color" content="#000000">
+
+  <!-- Sora & JetBrains Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css?v=calm-apple-v9">
+</head>
+<body>
+
+  <!-- Apple-Style Dynamic Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Top Announcement Bar / Notification -->
+  <div class="top-banner" data-animate="fade">
+    <div class="container top-banner-content">
+      <span class="banner-pill">macOS 15 Sequoia Ready</span>
+      <span class="banner-text">Native Apple Silicon M1/M2/M3/M4 & Intel builds now live.</span>
+      <a href="#details-and-price" class="banner-link">View Architecture & Pricing <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <a href="#" class="brand-logo" id="nav-brand-logo">
+          <div class="logo-mark">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="dewDropNav" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#38BDF8"/>
+                  <stop offset="55%" stop-color="#0EA5E9"/>
+                  <stop offset="100%" stop-color="#0284C7"/>
+                </linearGradient>
+              </defs>
+              <path d="M16 2.5C16 2.5 5.5 13.5 5.5 21C5.5 26.5 10 30 16 30C22 30 26.5 26.5 26.5 21C26.5 13.5 16 2.5 16 2.5Z" fill="url(#dewDropNav)"/>
+              <path d="M9.8 16.2C9.2 17.5 9.1 19.5 9.7 21C10.1 21.8 10.9 22.8 12 23.4" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M18.6 10.5V22.2M18.6 22.2C18.6 22.2 17.4 23 15.4 23C12.8 23 11 21 11 18.4C11 15.8 12.8 13.8 15.4 13.8C17.4 13.8 18.6 14.6 18.6 14.6" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="brand-name">dewDrive</span>
+        </a>
+        <div class="nav-status-badge">
+          <span class="status-dot"></span>
+          <span>macOS 15 Sequoia Ready</span>
+        </div>
+      </div>
+
+      <nav class="nav-center" aria-label="Main Navigation">
+        <a href="#details-and-price" class="nav-link">Details & Pricing</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#benchmarks" class="nav-link">M-Series Benchmarks</a>
+        <a href="#showcase" class="nav-link">dewRewind</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="nav-right">
+        <!-- Command-K Trigger Button -->
+        <button class="cmd-k-btn" id="cmd-k-trigger" aria-label="Open Command Menu (Press Cmd+K)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <span class="cmd-text">Search...</span>
+          <span class="cmd-shortcut">⌘K</span>
+        </button>
+
+        <a href="#download" class="btn btn-primary btn-sm download-trigger-btn">
+          <span>Download DMG</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================================================================
+         1. SCROLL-BASED 3D IMAGE SEQUENCE HERO SECTION
+         (Apple-grade 300-frame scrollytelling canvas with synced narrative cards)
+         ==================================================================== -->
+    <section class="hero-scroll-track" id="hero">
+      <div class="hero-sticky-stage">
+        
+        <!-- High-Performance GPU Accelerated Canvas -->
+        <canvas id="hero-sequence-canvas" class="hero-canvas"></canvas>
+        
+        <!-- Dark Atmospheric Vignette for Apple Keynote Contrast -->
+        <div class="hero-canvas-vignette"></div>
+
+        <!-- Grand Opening Hero Header (Scroll 0% - 15%, dissolves gracefully on scroll) -->
+        <div class="hero-intro-header" id="hero-intro-header">
+          <div class="hero-pill-badge">
+            <span class="pill-dot"></span>
+            <span class="pill-text">Apple Silicon M1/M2/M3/M4 & Intel Universal</span>
+            <span class="pill-tag">Universal DMG v1.4.2</span>
+          </div>
+          
+          <h1 class="hero-headline">
+            Serious storage.<br>Effortless recovery.
+          </h1>
+          
+          <p class="hero-subheadline">
+            Client-side encrypted snapshots to any storage with zero vendor lock-in.
+          </p>
+          
+          <div class="hero-actions-row">
+            <button class="apple-pill-cta download-trigger-btn">
+              <svg class="apple-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.74 1.04-1.77.92-2.81-.9.04-1.99.6-2.63 1.34-.57.65-1.07 1.7-1 2.76 1.01.08 2.03-.52 2.71-1.29z"/>
+              </svg>
+              <span>Download for Mac</span>
+            </button>
+            <a href="#details-and-price" class="apple-pill-secondary">
+              <span>Explore Keynote & Pricing</span>
+              <span class="arrow">&darr;</span>
+            </a>
+          </div>
+
+          <div class="hero-scroll-cue">
+            <div class="mouse-icon">
+              <div class="mouse-wheel"></div>
+            </div>
+            <span class="cue-text">Scroll to explore keynote sequence</span>
+          </div>
+        </div>
+
+        <!-- Floating Keynote Feature Deck (Bottom-Left: Leaves 3D Center 100% Free) -->
+        <div class="hero-keynote-deck" id="hero-keynote-deck">
+          <!-- Step 1: FastCDC Rabin Chunking -->
+          <div class="keynote-card" data-step="1">
+            <div class="keynote-eyebrow">
+              <span class="eyebrow-accent">ACT 01</span>
+              <span class="eyebrow-sep">/</span>
+              <span>FASTCDC CHUNKING PIPELINE</span>
+            </div>
+            <h3 class="keynote-title">Fluid Content Chunking.</h3>
+            <p class="keynote-desc">
+              Files are sliced along dynamic Rabin fingerprint boundaries. When you modify an 8K video or Xcode project, only the exact changed byte delta uploads.
+            </p>
+            <div class="keynote-chips">
+              <span class="chip-item"><span class="chip-dot"></span>Up to 72% Bandwidth Saved</span>
+              <span class="chip-item muted">Sub-file Rabin Hashing</span>
+            </div>
+          </div>
+
+          <!-- Step 2: Zero-Knowledge Secure Enclave -->
+          <div class="keynote-card" data-step="2">
+            <div class="keynote-eyebrow">
+              <span class="eyebrow-accent">ACT 02</span>
+              <span class="eyebrow-sep">/</span>
+              <span>ZERO-KNOWLEDGE ENCLAVE</span>
+            </div>
+            <h3 class="keynote-title">Keys Stay on Your Mac.</h3>
+            <p class="keynote-desc">
+              End-to-end encryption anchored strictly inside Apple Silicon's hardware Secure Enclave using Argon2id. No cloud provider or employee can read a byte.
+            </p>
+            <div class="keynote-chips">
+              <span class="chip-item"><span class="chip-dot emerald"></span>Argon2id Hardware KDF</span>
+              <span class="chip-item muted">AES-256-GCM / Poly1305</span>
+            </div>
+          </div>
+
+          <!-- Step 3: Sovereign Multi-Cloud Mesh -->
+          <div class="keynote-card" data-step="3">
+            <div class="keynote-eyebrow">
+              <span class="eyebrow-accent">ACT 03</span>
+              <span class="eyebrow-sep">/</span>
+              <span>SOVEREIGN MULTI-CLOUD</span>
+            </div>
+            <h3 class="keynote-title">Any Cloud. Zero Lock-in.</h3>
+            <p class="keynote-desc">
+              Direct TLS streams to Wasabi, Backblaze B2, Cloudflare R2, AWS S3, or local 10GbE NAS. Immutable Compliance Mode Object Lock eliminates ransomware.
+            </p>
+            <div class="keynote-chips">
+              <span class="chip-item"><span class="chip-dot purple"></span>100% Open Restic & Kopia Specs</span>
+              <span class="chip-item muted">Direct TLS Streaming</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-Time Cinematic HUD Pill (Bottom Right: Interactive Controller) -->
+        <div class="hero-playback-hud" id="hero-hud" role="region" aria-label="3D Keynote Sequence Controller">
+          <div class="hud-top">
+            <button class="hud-play-btn" id="hero-hud-play" type="button" aria-label="Play or Pause 3D Sequence" title="Play or Pause Sequence">
+              <svg class="hud-icon play-icon" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              <svg class="hud-icon pause-icon hidden" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </button>
+            <div class="hud-info">
+              <span class="hud-title" id="hero-hud-act-name">KEYNOTE OVERVIEW</span>
+              <span class="hud-frame-num" id="hero-frame-counter">FRAME 002 / 300</span>
+            </div>
+            <span class="hud-percent" id="hero-hud-percent">0%</span>
+          </div>
+          <div class="hud-track-wrap" id="hero-scrub-wrap" title="Drag or click to scrub 3D timeline">
+            <div class="hud-track" id="hero-scrub-track">
+              <div class="hud-fill" id="hero-hud-progress"></div>
+              <div class="hud-thumb" id="hero-hud-thumb"></div>
+              <span class="hud-tick" data-target="0.18" style="left: 18%;" title="Jump to Act 01: FastCDC"></span>
+              <span class="hud-tick" data-target="0.46" style="left: 46%;" title="Jump to Act 02: Enclave"></span>
+              <span class="hud-tick" data-target="0.72" style="left: 72%;" title="Jump to Act 03: Multi-Cloud"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         2. DEDICATED SECTION: DETAILS & PRICING
+         (Right below hero as explicitly requested: "different section for explaining details and price")
+         ==================================================================== -->
+    <section class="section detail-price-section" id="details-and-price">
+      <div class="container">
+        
+        <!-- Part A: Technical Architecture Details Header -->
+        <div class="section-header text-center" data-animate="fade-up">
+          <span class="section-tag">CHAPTER 01 · SYSTEM ARCHITECTURE</span>
+          <h2 class="section-title text-hero-scale" data-animate="text-reveal">The Architecture of Total Control.</h2>
+          <p class="section-subtitle">
+            Decoupled from cloud storage markups. Built on open standards.
+          </p>
+        </div>
+
+        <!-- Interactive FastCDC Engine Comparison Visualizer -->
+        <div class="engine-vis-box apple-glow-card apple-tilt-card" data-animate="fade-up">
+          <div class="engine-vis-header">
+            <div>
+              <span class="calc-pill">INTERACTIVE ARCHITECTURE VISUALIZER</span>
+              <h3 style="font-size: 19px; font-weight: 700; color: #FFFFFF; margin-top: 4px;">Why FastCDC Content-Defined Chunking Matters</h3>
+            </div>
+            <div class="engine-tabs">
+              <button class="engine-tab-btn" data-engine="whole-file">Traditional Whole-File</button>
+              <button class="engine-tab-btn" data-engine="fixed-chunk">Naive Fixed 4MB Chunking</button>
+              <button class="engine-tab-btn active" data-engine="fastcdc">dewDrive FastCDC</button>
+            </div>
+          </div>
+
+          <div class="vis-display-canvas">
+            <div class="vis-file-meta">
+              <span id="vis-meta-sub">Target file: 50.0 GB 8K ProRes Video (dewDrive FastCDC with Rabin Fingerprinting)</span>
+              <span class="vis-summary-badge success" id="vis-badge">2.1 MB uploaded (99.6% saved)</span>
+            </div>
+
+            <!-- Dynamic Animated Stream -->
+            <div class="vis-chunks-stream" id="vis-stream">
+              <div class="vis-chunk cached">Cached (4MB)</div>
+              <div class="vis-chunk cached">Cached (8MB)</div>
+              <div class="vis-chunk dew-fastcdc">Edited (2.1MB)</div>
+              <div class="vis-chunk cached">Cached (4MB)</div>
+              <div class="vis-chunk cached">Cached (6MB)</div>
+              <div class="vis-chunk cached">Cached (8MB)</div>
+              <div class="vis-chunk cached">Cached (4MB)</div>
+              <div class="vis-chunk cached">Cached (4MB)</div>
+            </div>
+
+            <div class="vis-legend-bar">
+              <span id="vis-legend">FastCDC detects content-defined boundaries. Only the exact modified chunk is uploaded; remaining 49.98 GB referenced from cache.</span>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">Live Rabin Engine</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Deep Architectural Foundations -->
+        <div class="architecture-grid" data-animate="fade-up">
+          <div class="arch-card apple-tilt-card apple-glow-card">
+            <div class="arch-number">01</div>
+            <h3 class="arch-title">FastCDC Pipeline</h3>
+            <p class="arch-desc">
+              Slices files along semantic Rabin boundaries. A 2MB change in a 20GB project only uploads 2MB.
+            </p>
+            <div class="arch-metric">
+              <span class="m-val">Up to 72%</span>
+              <span class="m-lbl">Bandwidth & Storage Saved</span>
+            </div>
+          </div>
+
+          <div class="arch-card highlight-glow apple-tilt-card apple-glow-card">
+            <div class="arch-number">02</div>
+            <h3 class="arch-title">Secure Enclave</h3>
+            <p class="arch-desc">
+              Keys generated strictly in RAM and Secure Enclave via Argon2id. Zero vendor, host, or subpoena access.
+            </p>
+            <div class="arch-metric">
+              <span class="m-val">Argon2id</span>
+              <span class="m-lbl">Hardware Secure Enclave KDF</span>
+            </div>
+          </div>
+
+          <div class="arch-card apple-tilt-card apple-glow-card">
+            <div class="arch-number">03</div>
+            <h3 class="arch-title">Open Standards</h3>
+            <p class="arch-desc">
+              Repository formats conform strictly to open Restic and Kopia specs. Mount and inspect snapshots anytime via Terminal.
+            </p>
+            <div class="arch-metric">
+              <span class="m-val">100%</span>
+              <span class="m-lbl">Open Standard Restic / Kopia</span>
+            </div>
+          </div>
+
+          <div class="arch-card apple-tilt-card apple-glow-card">
+            <div class="arch-number">04</div>
+            <h3 class="arch-title">NVMe SMART Guardian</h3>
+            <p class="arch-desc">
+              Monitors NAND flash wear leveling, temperature spikes, and bad blocks 24/7 before hardware failure strikes.
+            </p>
+            <div class="arch-metric">
+              <span class="m-val">24/7</span>
+              <span class="m-lbl">Hardware Wear & Bit-rot Monitoring</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Part B: Storage Economics & Transparent Pricing Studio Header -->
+        <div class="section-header text-center" style="margin-top: 110px;" data-animate="fade-up" id="pricing">
+          <span class="section-tag">CHAPTER 02 · THE ANTI-SUBSCRIPTION PRICING STUDIO</span>
+          <h2 class="section-title text-hero-scale" data-animate="text-reveal">Buy It Once. Own It for Life.</h2>
+          <p class="section-subtitle">
+            Pay once for software. Pay pennies for raw storage.
+          </p>
+        </div>
+
+        <!-- Apple Store-Style Pricing Studio Configurator -->
+        <div class="apple-pricing-studio apple-tilt-card" data-animate="fade-up">
+          <div class="studio-model-selector">
+            <button class="studio-model-tab active" data-model="personal">
+              <div class="studio-model-name">Personal Mac</div>
+              <div class="studio-model-price">$49</div>
+              <div class="studio-model-sub">Perpetual License · 1 Mac</div>
+            </button>
+            <button class="studio-model-tab" data-model="studio">
+              <div class="studio-model-name">Studio Pro (Recommended)</div>
+              <div class="studio-model-price">$89</div>
+              <div class="studio-model-sub">Perpetual License · 3 Macs</div>
+            </button>
+            <button class="studio-model-tab" data-model="fleet">
+              <div class="studio-model-name">Team & Agency Fleet</div>
+              <div class="studio-model-price">$18 <span style="font-size: 13px; font-weight: normal; color: var(--text-muted);">/ seat / mo</span></div>
+              <div class="studio-model-sub">Centralized Fleet RMM</div>
+            </button>
+          </div>
+
+          <div class="studio-main-body">
+            <div class="studio-specs-list" id="studio-specs-list">
+              <div class="studio-spec-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <div><strong>1 Mac Perpetual Activation:</strong> Pay once, run and restore forever. No recurring fee.</div>
+              </div>
+              <div class="studio-spec-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <div><strong>Full Native macOS Swift App:</strong> FastCDC chunking engine & background daemon.</div>
+              </div>
+              <div class="studio-spec-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <div><strong>Unlimited Storage Vaults:</strong> Connect local NVMe, NAS, or private S3 buckets.</div>
+              </div>
+              <div class="studio-spec-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <div><strong>dewRewind Virtual Finder Explorer:</strong> 1-click snapshot restore without overwrite.</div>
+              </div>
+              <div class="studio-spec-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <div><strong>30-Day Money-Back Guarantee:</strong> 100% risk-free digital sovereignty.</div>
+              </div>
+            </div>
+
+            <div class="studio-checkout-box">
+              <div class="studio-final-price" id="studio-final-price">$49</div>
+              <div class="studio-final-sub" id="studio-final-sub">One-time perpetual payment · 1 Mac · No subscriptions ever</div>
+              <button class="btn btn-primary btn-lg w-full download-trigger-btn" id="studio-checkout-btn">
+                <span>Buy Personal Mac ($49)</span>
+              </button>
+              <div class="studio-guarantee-pill">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>30-Day Money-Back Guarantee · Zero Lock-in</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Storage Economics & Savings Calculator -->
+        <div class="calculator-card apple-glow-card apple-tilt-card" id="calculator" data-animate="fade-up" style="margin-top: 50px;">
+          <div class="calc-header">
+            <div>
+              <span class="calc-pill">INTERACTIVE STORAGE ECONOMICS ENGINE</span>
+              <h3 class="calc-title">Compare your annual storage cost</h3>
+              <p class="calc-sub">Annual and 5-year savings compared to locked-in cloud subscriptions.</p>
+            </div>
+            <div class="calc-toggle-size">
+              <span class="storage-display-value" id="storage-size-label">2,000 GB (2 TB)</span>
+            </div>
+          </div>
+
+          <!-- Quick Presets -->
+          <div class="calc-preset-row">
+            <span class="preset-title">Presets:</span>
+            <button class="calc-preset-btn" data-preset="500">500 GB Creator</button>
+            <button class="calc-preset-btn active" data-preset="2000">2 TB Pro Video</button>
+            <button class="calc-preset-btn" data-preset="8000">8 TB Studio Array</button>
+            <button class="calc-preset-btn" data-preset="10000">10 TB Agency Archive</button>
+          </div>
+
+          <div class="calc-slider-box">
+            <input type="range" min="250" max="10000" step="250" value="2000" class="calc-slider" id="storage-slider" aria-label="Storage Size Slider">
+            <div class="slider-marks">
+              <span>250 GB</span>
+              <span>1 TB</span>
+              <span>2 TB</span>
+              <span>5 TB</span>
+              <span>10 TB</span>
+            </div>
+          </div>
+
+          <!-- Provider Selectors -->
+          <div class="calc-provider-row">
+            <span class="preset-title">Target Storage:</span>
+            <button class="provider-pill-opt active" data-provider="wasabi">Wasabi ($0.0059/GB)</button>
+            <button class="provider-pill-opt" data-provider="b2">Backblaze B2 ($0.006/GB)</button>
+            <button class="provider-pill-opt" data-provider="r2">Cloudflare R2 ($0.015/GB)</button>
+            <button class="provider-pill-opt" data-provider="s3">AWS S3 ($0.023/GB)</button>
+            <button class="provider-pill-opt" data-provider="nas">Local NAS ($0/mo)</button>
+          </div>
+
+          <div class="calc-comparison-grid">
+            <div class="calc-cost-col traditional">
+              <div class="col-head">
+                <span class="col-title">Traditional Proprietary Cloud</span>
+                <span class="col-badge">Lock-in Markup</span>
+              </div>
+              <div class="cost-number" id="trad-cost-val">$240<span class="period">/year</span></div>
+              <ul class="cost-notes">
+                <li>• $20/month proprietary recurring fee</li>
+                <li>• Data stored in closed, vendor-locked database</li>
+                <li>• Cancelling subscription purges all snapshots</li>
+              </ul>
+            </div>
+
+            <div class="calc-cost-col dewdrive-winner">
+              <div class="col-head">
+                <span class="col-title">dewDrive + Raw S3 Storage</span>
+                <span class="col-badge highlight">Sovereign Ownership</span>
+              </div>
+              <div class="cost-number highlight" id="dew-cost-val">$72<span class="period">/year</span></div>
+              <ul class="cost-notes">
+                <li>• Raw B2/Wasabi cloud pricing (~$0.0059/GB)</li>
+                <li>• FastCDC deduplication halves stored byte volume</li>
+                <li>• Snapshots stay yours forever without subscription</li>
+              </ul>
+              <div class="savings-banner" id="savings-tag">You save <strong>$168 / year</strong> (70% savings) · 5-Year Savings: <strong>$840</strong></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. STICKY SCROLLER: "HOW IT WORKS" (APPLE CHAPTER PINNED STAGE)
+         ==================================================================== -->
+    <section class="sticky-narrative-section" id="how-it-works">
+      <div class="container">
+        <div class="section-header text-center" data-animate="fade-up">
+          <span class="section-tag">CHAPTER 03 · THE THREE-STEP PIPELINE</span>
+          <h2 class="section-title text-hero-scale" data-animate="text-reveal">Precision at Every Byte.</h2>
+          <p class="section-subtitle">
+            Swift-native background daemon. Under 0.5% CPU.
+          </p>
+        </div>
+
+        <div class="narrative-container">
+          <!-- Left Column: Sequential Steps -->
+          <div class="narrative-steps-col">
+            
+            <div class="narrative-step-card apple-tilt-card apple-glow-card active" data-step="0">
+              <span class="n-step-num">STEP 01</span>
+              <h3 class="n-step-title">Zero-Touch APFS Ingestion</h3>
+              <p class="n-step-desc">
+                Using native macOS FSEvents, dewDrive listens to file changes at the file-system level. It doesn't waste CPU indexing files that haven't touched a bit. Background consumption remains under 0.5% CPU.
+              </p>
+            </div>
+
+            <div class="narrative-step-card apple-tilt-card apple-glow-card" data-step="1">
+              <span class="n-step-num">STEP 02</span>
+              <h3 class="n-step-title">Hardware Secure Enclave Chunker</h3>
+              <p class="n-step-desc">
+                Files are cut into semantic Rabin chunks, hashed using BLAKE3 at 1.4 GB/s NVMe wire speed, and encrypted in RAM using keys derived from Argon2id inside Apple Silicon's hardware Secure Enclave.
+              </p>
+            </div>
+
+            <div class="narrative-step-card apple-tilt-card apple-glow-card" data-step="2">
+              <span class="n-step-num">STEP 03</span>
+              <h3 class="n-step-title">S3 Object Lock Dispatch</h3>
+              <p class="n-step-desc">
+                Deduplicated packfiles are streamed directly over authenticated TLS to your chosen storage destination with Compliance Mode Object Lock enabled, making historical snapshots completely ransomware-proof.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Pinned Architecture Visualizer -->
+          <div class="narrative-sticky-pane apple-glow-card">
+            <h4 style="font-size: 15px; font-weight: 700; color: #FFFFFF; margin-bottom: 20px;">Live Data Pipeline Telemetry</h4>
+            <div class="pipeline-diagram">
+              <div class="pipe-node highlight-pipe">
+                <div>
+                  <div class="pipe-node-title">1. APFS Kernel Monitor</div>
+                  <div class="pipe-node-sub">FSEvents Event Stream · 0.2% CPU</div>
+                </div>
+                <span class="pill-dot"></span>
+              </div>
+              <div class="pipe-node">
+                <div>
+                  <div class="pipe-node-title">2. FastCDC + Rabin Chunker</div>
+                  <div class="pipe-node-sub">BLAKE3 Hash Engine · 1,420 MB/s</div>
+                </div>
+                <span class="pill-dot"></span>
+              </div>
+              <div class="pipe-node">
+                <div>
+                  <div class="pipe-node-title">3. Secure Enclave Encryptor</div>
+                  <div class="pipe-node-sub">Argon2id · AES-256-GCM / Poly1305</div>
+                </div>
+                <span class="pill-dot"></span>
+              </div>
+              <div class="pipe-node">
+                <div>
+                  <div class="pipe-node-title">4. S3 Object Lock Target</div>
+                  <div class="pipe-node-sub">Compliance Mode · Immutable</div>
+                </div>
+                <span class="pulse-emerald"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         4. DEEP-DIVE FEATURE SHOWCASE (dewRewind Scrubber + Hardware RMM)
+         ==================================================================== -->
+    <section class="section showcase-section" id="showcase">
+      <div class="container">
+        
+        <div class="section-header text-center" data-animate="fade-up">
+          <span class="section-tag">CHAPTER 04 · INTERACTIVE CAPABILITIES</span>
+          <h2 class="section-title text-hero-scale" data-animate="text-reveal">Designed for Simplicity. Built for Disasters.</h2>
+          <p class="section-subtitle">
+            Point-in-time recovery and predictive NVMe telemetry.
+          </p>
+        </div>
+
+        <!-- Interactive Feature Tabs -->
+        <div class="feature-tabs" role="tablist" data-animate="fade-up">
+          <button class="feature-tab-btn active" id="tab-btn-protect" role="tab" aria-selected="true" data-tab="protect">
+            <span class="tab-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <span class="tab-label">1. Protect (Secure Vaults)</span>
+          </button>
+          
+          <button class="feature-tab-btn" id="tab-btn-recover" role="tab" aria-selected="false" data-tab="recover">
+            <span class="tab-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </span>
+            <span class="tab-label">2. Recover (dewRewind)</span>
+          </button>
+
+          <button class="feature-tab-btn" id="tab-btn-monitor" role="tab" aria-selected="false" data-tab="monitor">
+            <span class="tab-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </span>
+            <span class="tab-label">3. Monitor (Hardware RMM)</span>
+          </button>
+        </div>
+
+        <!-- Tab 1: Protect (Secure Vaults) -->
+        <div class="feature-panel active" id="panel-protect" role="tabpanel">
+          <div class="feature-grid">
+            <div class="feature-info" data-animate="fade-up">
+              <span class="feature-badge">FEATURE 01 · VAULT SECURITY</span>
+              <h3 class="feature-heading">Back up everything with Secure Vaults</h3>
+              <p class="feature-subheading">Encrypted, deduplicated snapshots, set up once and forgotten.</p>
+              <ul class="feature-checklist">
+                <li>
+                  <div class="chk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><strong>Client-side encryption:</strong> Encrypted in RAM before hitting disk or network socket with AES-256-GCM.</div>
+                </li>
+                <li>
+                  <div class="chk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><strong>Deduplicated snapshots:</strong> Content-Defined Chunking saves up to 72% storage and bandwidth.</div>
+                </li>
+                <li>
+                  <div class="chk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><strong>Any S3 vault:</strong> Connect Wasabi, Backblaze B2, Cloudflare R2, AWS, or local 10GbE NAS.</div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="feature-mock" data-animate="fade-scale">
+              <div class="mock-card apple-tilt-card apple-glow-card">
+                <div class="mock-card-header">
+                  <div class="mac-traffic-lights">
+                    <span class="traffic-light close"></span>
+                    <span class="traffic-light minimize"></span>
+                    <span class="traffic-light zoom"></span>
+                  </div>
+                  <span class="mock-title">Vault Sources & Encryption Policy</span>
+                  <span class="mock-enc-badge"><span class="pulse-emerald"></span> AES-256 Active</span>
+                </div>
+                <div class="mock-card-body">
+                  <div class="folder-list">
+                    <div class="folder-row active">
+                      <div class="f-info">
+                        <svg class="folder-icon" width="20" height="20" viewBox="0 0 24 24" fill="#38BDF8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <div>
+                          <div class="f-name">Desktop & Documents</div>
+                          <div class="f-path">/Users/alex/Documents · 48,210 files</div>
+                        </div>
+                      </div>
+                      <span class="f-status syncd">Scheduled (Every 1h)</span>
+                    </div>
+                    <div class="folder-row active">
+                      <div class="f-info">
+                        <svg class="folder-icon" width="20" height="20" viewBox="0 0 24 24" fill="#38BDF8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <div>
+                          <div class="f-name">Photos & 8K Video Library</div>
+                          <div class="f-path">~/Pictures/Photos.photoslibrary · 420.4 GB</div>
+                        </div>
+                      </div>
+                      <span class="f-status syncd">FastCDC Deduplicated</span>
+                    </div>
+                  </div>
+                  <div class="mock-progress-box">
+                    <div class="p-labels">
+                      <span>Live Snapshot Progress</span>
+                      <span class="p-percent">Snapshot #429 · Encrypting chunks</span>
+                    </div>
+                    <div class="p-bar"><div class="p-bar-fill" style="width: 82%;"></div></div>
+                    <div class="p-details">
+                      <span>Chunking speed: 312 MB/s</span>
+                      <span>Deduplication ratio: 2.8x</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Recover (dewRewind) -->
+        <div class="feature-panel" id="panel-recover" role="tabpanel">
+          <div class="feature-grid">
+            <div class="feature-info">
+              <span class="feature-badge">FEATURE 02 · POINT-IN-TIME RECOVERY</span>
+              <h3 class="feature-heading">Bring anything back with dewRewind</h3>
+              <p class="feature-subheading">Scrub through time and restore files without overwriting present work.</p>
+              <ul class="feature-checklist">
+                <li>
+                  <div class="chk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><strong>Virtual Finder Mount:</strong> Mount any historical second as a native Mac drive instantly.</div>
+                </li>
+                <li>
+                  <div class="chk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><strong>Zero Collisions:</strong> Restore side-by-side or directly back to original path.</div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="feature-mock">
+              <div class="mock-card scrubber-card apple-tilt-card apple-glow-card">
+                <div class="mock-card-header">
+                  <div class="mac-traffic-lights">
+                    <span class="traffic-light close"></span>
+                    <span class="traffic-light minimize"></span>
+                    <span class="traffic-light zoom"></span>
+                  </div>
+                  <span class="mock-title">dewRewind · Point-in-Time Explorer</span>
+                  <span class="mock-enc-badge scrubber-indicator">Scrubber Active</span>
+                </div>
+                <div class="mock-card-body">
+                  <div class="timeline-scrubber-wrapper">
+                    <div class="scrubber-header">
+                      <span class="scrub-label">SCRUB TIMELINE:</span>
+                      <span class="active-snapshot-label" id="scrubber-timestamp">16 Sep 2026, 11:45 PM</span>
+                    </div>
+                    <input type="range" min="0" max="4" value="2" class="timeline-slider" id="rewind-slider" aria-label="dewRewind snapshot timeline slider">
+                    <div class="timeline-ticks">
+                      <span class="tick" data-val="0">14 Sep</span>
+                      <span class="tick" data-val="1">15 Sep</span>
+                      <span class="tick active" data-val="2">16 Sep</span>
+                      <span class="tick" data-val="3">17 Sep</span>
+                      <span class="tick" data-val="4">Today</span>
+                    </div>
+                  </div>
+                  <div class="rewind-files-box">
+                    <div class="rf-header">
+                      <span>FILES IN THIS SNAPSHOT</span>
+                      <span class="rf-state" id="rewind-status-tag">State before major design system refactor</span>
+                    </div>
+                    <div class="rf-list" id="rewind-file-list"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Monitor (Hardware RMM) -->
+        <div class="feature-panel" id="panel-monitor" role="tabpanel">
+          <div class="feature-grid">
+            <div class="feature-info">
+              <span class="feature-badge">FEATURE 03 · HARDWARE & INTEGRITY RMM</span>
+              <h3 class="feature-heading">Catch failing SSDs before they die</h3>
+              <p class="feature-subheading">24/7 background telemetry that monitors physical drive endurance.</p>
+              <ul class="feature-checklist">
+                <li>
+                  <div class="chk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><strong>NAND Wear Leveling:</strong> Estimates remaining life based on Terabytes Written (TBW).</div>
+                </li>
+                <li>
+                  <div class="chk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><strong>Silent Bit-rot Scrub:</strong> Automated background SHA-256 scrubbing identifies corrupted sectors.</div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="feature-mock">
+              <div class="mock-card apple-tilt-card apple-glow-card">
+                <div class="mock-card-header">
+                  <div class="mac-traffic-lights">
+                    <span class="traffic-light close"></span>
+                    <span class="traffic-light minimize"></span>
+                    <span class="traffic-light zoom"></span>
+                  </div>
+                  <span class="mock-title">Hardware Telemetry & Integrity Diagnostics</span>
+                  <span class="mock-enc-badge status-healthy"><span class="pulse-emerald"></span> System Nominal</span>
+                </div>
+                <div class="mock-card-body">
+                  <div class="diagnostic-grid">
+                    <div class="diag-card">
+                      <div class="d-header">
+                        <span class="d-title">Internal Apple NVMe</span>
+                        <span class="badge-tag green">APFS</span>
+                      </div>
+                      <div class="d-metrics">
+                        <div class="d-row"><span class="d-lbl">SMART status:</span><span class="d-val healthy">Healthy (0 warnings)</span></div>
+                        <div class="d-row"><span class="d-lbl">SSD wear:</span><span class="d-val">4% (96% life remaining)</span></div>
+                        <div class="d-row"><span class="d-lbl">Temperature:</span><span class="d-val">34°C (Normal)</span></div>
+                      </div>
+                    </div>
+                    <div class="diag-card">
+                      <div class="d-header">
+                        <span class="d-title">Thunderbolt NVMe Array</span>
+                        <span class="badge-tag blue">PCIe 4.0</span>
+                      </div>
+                      <div class="d-metrics">
+                        <div class="d-row"><span class="d-lbl">Bad blocks:</span><span class="d-val">0 reallocated sectors</span></div>
+                        <div class="d-row"><span class="d-lbl">Throughput:</span><span class="d-val">1,840 MB/s sequential</span></div>
+                        <div class="d-row"><span class="d-lbl">Integrity:</span><span class="d-val verified">100% matched</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         5. PERFORMANCE BENCHMARKS (APPLE SILICON M4 MAX VS INTEL)
+         ==================================================================== -->
+    <section class="benchmark-section" id="benchmarks" data-animate="fade-up">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">CHAPTER 05 · SILICON-ACCELERATED PERFORMANCE</span>
+          <h2 class="section-title text-hero-scale" data-animate="text-reveal">Unrivaled Apple Silicon Throughput.</h2>
+          <p class="section-subtitle">
+            Hardware-accelerated crypto at NVMe wire speed.
+          </p>
+        </div>
+
+        <div class="benchmarks-grid">
+          
+          <div class="bench-card apple-tilt-card apple-glow-card">
+            <h3 class="bench-card-title">AES-256 Hashing & Encryption</h3>
+            <p class="bench-card-sub">Throughput sustained on internal NVMe (Higher is better)</p>
+            <div class="bench-bars-stack">
+              <div class="bench-bar-item">
+                <div class="bench-bar-label">
+                  <span>Apple M4 Max (dewDrive)</span>
+                  <strong style="color: #38BDF8;">1,420 MB/s</strong>
+                </div>
+                <div class="bench-bar-track">
+                  <div class="bench-bar-fill apple" data-width="100%" style="width: 0%;"></div>
+                </div>
+              </div>
+              <div class="bench-bar-item">
+                <div class="bench-bar-label">
+                  <span>Intel Core i9 Competitor</span>
+                  <span>310 MB/s</span>
+                </div>
+                <div class="bench-bar-track">
+                  <div class="bench-bar-fill intel" data-width="22%" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bench-card apple-tilt-card apple-glow-card">
+            <h3 class="bench-card-title">Background Memory Footprint</h3>
+            <p class="bench-card-sub">RAM consumed while monitoring 500,000 files (Lower is better)</p>
+            <div class="bench-bars-stack">
+              <div class="bench-bar-item">
+                <div class="bench-bar-label">
+                  <span>dewDrive Swift Daemon</span>
+                  <strong style="color: #10B981;">42 MB RAM</strong>
+                </div>
+                <div class="bench-bar-track">
+                  <div class="bench-bar-fill apple" data-width="15%" style="width: 0%;"></div>
+                </div>
+              </div>
+              <div class="bench-bar-item">
+                <div class="bench-bar-label">
+                  <span>Java / Electron Competitor</span>
+                  <span>840 MB RAM</span>
+                </div>
+                <div class="bench-bar-track">
+                  <div class="bench-bar-fill intel" data-width="100%" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bench-card apple-tilt-card apple-glow-card">
+            <h3 class="bench-card-title">Battery Impact on MacBook Pro</h3>
+            <p class="bench-card-sub">Hourly background snapshot battery drain (Lower is better)</p>
+            <div class="bench-bars-stack">
+              <div class="bench-bar-item">
+                <div class="bench-bar-label">
+                  <span>dewDrive Efficiency Cores</span>
+                  <strong style="color: #38BDF8;">&lt;0.2% / hour</strong>
+                </div>
+                <div class="bench-bar-track">
+                  <div class="bench-bar-fill apple" data-width="12%" style="width: 0%;"></div>
+                </div>
+              </div>
+              <div class="bench-bar-item">
+                <div class="bench-bar-label">
+                  <span>Legacy Background Agent</span>
+                  <span>3.8% / hour</span>
+                </div>
+                <div class="bench-bar-track">
+                  <div class="bench-bar-fill intel" data-width="85%" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         6. SIDE-BY-SIDE COMPETITIVE MATRIX
+         ==================================================================== -->
+    <section class="comp-matrix-section" id="matrix" data-animate="fade-up">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">CHAPTER 06 · COMPETITIVE BENCHMARK</span>
+          <h2 class="section-title text-hero-scale" data-animate="text-reveal">How dewDrive Compares.</h2>
+          <p class="section-subtitle">
+            Open standards vs. locked-in subscription tools.
+          </p>
+        </div>
+
+        <div class="comp-table-wrap apple-glow-card">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Feature / Capability</th>
+                <th class="highlight-col" style="color: #38BDF8;">dewDrive</th>
+                <th>Apple Time Machine</th>
+                <th>Backblaze Personal</th>
+                <th>Arq 7</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Open-Source Storage Format</strong></td>
+                <td class="highlight-col"><span class="badge-chk">✓ Restic / Kopia</span></td>
+                <td><span class="badge-x">✕ Closed Sparsebundle</span></td>
+                <td><span class="badge-x">✕ Proprietary Cloud</span></td>
+                <td><span class="badge-x">✕ Proprietary Arq format</span></td>
+              </tr>
+              <tr>
+                <td><strong>Zero Vendor Lock-in (Restore without app)</strong></td>
+                <td class="highlight-col"><span class="badge-chk">✓ 100% via free CLI</span></td>
+                <td><span class="badge-x">✕ Requires macOS</span></td>
+                <td><span class="badge-x">✕ Cannot restore without account</span></td>
+                <td><span class="badge-x">✕ Closed binary format</span></td>
+              </tr>
+              <tr>
+                <td><strong>S3 Object Lock Ransomware Immutability</strong></td>
+                <td class="highlight-col"><span class="badge-chk">✓ Native Compliance Mode</span></td>
+                <td><span class="badge-x">✕ Easily erased by malware</span></td>
+                <td><span class="badge-x">✕ Sync overwrites ciphertext</span></td>
+                <td><span class="badge-chk">✓ Basic retention</span></td>
+              </tr>
+              <tr>
+                <td><strong>Fast Content-Defined Chunking (FastCDC)</strong></td>
+                <td class="highlight-col"><span class="badge-chk">✓ Sub-file Rabin hash</span></td>
+                <td><span class="badge-x">✕ Naive whole file / hardlinks</span></td>
+                <td><span class="badge-x">✕ 30MB fixed block chunks</span></td>
+                <td><span class="badge-chk">✓ Fixed chunking</span></td>
+              </tr>
+              <tr>
+                <td><strong>24/7 NVMe SSD SMART Telemetry</strong></td>
+                <td class="highlight-col"><span class="badge-chk">✓ Hardware wear alerts</span></td>
+                <td><span class="badge-x">✕ None</span></td>
+                <td><span class="badge-x">✕ None</span></td>
+                <td><span class="badge-x">✕ None</span></td>
+              </tr>
+              <tr>
+                <td><strong>Licensing Model</strong></td>
+                <td class="highlight-col"><strong style="color: #10B981;">Perpetual One-Time</strong></td>
+                <td>Free with macOS</td>
+                <td>$99 / year subscription</td>
+                <td>$49.99 + Upgrade fees</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         7. DEVELOPER & POWER USER TERMINAL INTEGRATION
+         ==================================================================== -->
+    <section class="section" id="terminal" data-animate="fade-up">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">CHAPTER 07 · DEVELOPER & CLI INTEGRATION</span>
+          <h2 class="section-title text-hero-scale" data-animate="text-reveal">Built for Terminal Enthusiasts.</h2>
+          <p class="section-subtitle">
+            Full CLI engine scriptable via launchd.
+          </p>
+        </div>
+
+        <div class="cli-showcase-box apple-glow-card">
+          <div class="cli-tabs-bar">
+            <button class="cli-tab-btn active" data-cmd="status">dew status --json</button>
+            <button class="cli-tab-btn" data-cmd="snapshot">dew snapshot create</button>
+            <button class="cli-tab-btn" data-cmd="restore">dew restore latest</button>
+            <button class="cli-tab-btn" data-cmd="verify">dew scrub --deep-verify</button>
+          </div>
+          <div class="cli-body-view" id="cli-body">
+            <span class="cmd-prompt">$</span> <span class="cmd-run">dew status --json</span>
+<span class="cmd-out">{
+  "daemon": "active",
+  "engine": "Kopia-v0.15-arm64",
+  "secure_enclave": "enabled (Argon2id)",
+  "active_vaults": 3,
+  "snapshots_total": 342,
+  "last_backup": "4m ago (verified SHA-256)",
+  "nvme_smart_health": "100% nominal (0 bad sectors)"
+}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         8. THE DEWDRIVE MANIFESTO (APPLE EDITORIAL QUOTE)
+         ==================================================================== -->
+    <section class="section philosophy-section" id="philosophy" data-animate="fade-up">
+      <div class="container">
+        <div class="philosophy-content">
+          <span class="section-tag">A MANIFESTO FOR DIGITAL SOVEREIGNTY</span>
+          <h2 class="philosophy-quote">
+            “Time Machine was designed in 2007 for 80GB spinning hard drives. Today, we shoot 8K RAW video, compile massive multi-gigabyte models, and carry entire creative lifetimes on our Macs. It was time for a modern engine.”
+          </h2>
+          <div class="philosophy-meta">
+            <span class="author-name">Marcus Vance</span>
+            <span class="author-role">Founder, dewDrive · Former Apple CoreOS Engineer</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         9. TECHNICAL RESOURCES & ARTICLES
+         ==================================================================== -->
+    <section class="section resources-section" id="resources" data-animate="fade-up">
+      <div class="container">
+        
+        <div class="resources-header-row">
+          <div>
+            <span class="section-tag">ENGINEERING PAPERS & GUIDES</span>
+            <h2 class="section-title">Deep Technical Resources</h2>
+          </div>
+          <a href="#resources" class="see-more-link" id="see-more-btn">
+            <span>Read all whitepapers</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="article-grid">
+          <!-- Article 1 -->
+          <article class="article-card apple-glow-card apple-tilt-card" data-article="1">
+            <div class="article-meta">
+              <span class="art-tag architecture">Architecture</span>
+              <span class="art-read">6 min read</span>
+            </div>
+            <h3 class="article-title">Why Immutable Backups and Content-Defined Chunking Beat Ransomware</h3>
+            <p class="article-excerpt">
+              A deep technical dive into FastCDC algorithms, S3 Object Lock compliance, and why traditional incremental backups fail modern extortion attacks.
+            </p>
+            <div class="article-footer">
+              <span class="art-author">Dr. Henrik Lind · Security Research</span>
+              <span class="art-arrow">&rarr;</span>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="article-card apple-glow-card apple-tilt-card" data-article="2">
+            <div class="article-meta">
+              <span class="art-tag rmm">Hardware RMM</span>
+              <span class="art-read">8 min read</span>
+            </div>
+            <h3 class="article-title">Detecting Silent SSD Degradation Before Catastrophic Drive Failure</h3>
+            <p class="article-excerpt">
+              How dewDrive parses raw NVMe SMART registers to alert you when wear leveling indicators and reallocated flash cells exceed safe thresholds.
+            </p>
+            <div class="article-footer">
+              <span class="art-author">Elena Rostova · Systems Engineering</span>
+              <span class="art-arrow">&rarr;</span>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article class="article-card apple-glow-card apple-tilt-card" data-article="3">
+            <div class="article-meta">
+              <span class="art-tag docs">Quickstart</span>
+              <span class="art-read">Docs · 2 min</span>
+            </div>
+            <h3 class="article-title">Back up your first Mac in under two minutes</h3>
+            <p class="article-excerpt">
+              Step-by-step walk-through to configure your first S3 bucket or external drive, generate your recovery key, and initiate an automated snapshot schedule.
+            </p>
+            <div class="article-footer">
+              <span class="art-author">dewDrive Docs Team</span>
+              <span class="art-arrow">&rarr;</span>
+            </div>
+          </article>
+
+          <!-- Article 4 -->
+          <article class="article-card apple-glow-card apple-tilt-card" data-article="4">
+            <div class="article-meta">
+              <span class="art-tag timeline">Company Story</span>
+              <span class="art-read">Timeline</span>
+            </div>
+            <h3 class="article-title">From 2009 to today: the story behind dewDrive</h3>
+            <p class="article-excerpt">
+              Why we got tired of brittle Time Machine sparsebundles corrupted over Wi-Fi, and built the native tool Mac power users deserved.
+            </p>
+            <div class="article-footer">
+              <span class="art-author">Marcus Vance · Founder</span>
+              <span class="art-arrow">&rarr;</span>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         10. FREQUENTLY ASKED QUESTIONS
+         ==================================================================== -->
+    <section class="section faq-section" id="faq" data-animate="fade-up">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag">COMMON QUESTIONS</span>
+          <h2 class="section-title text-hero-scale" data-animate="text-reveal">Frequently Asked Questions.</h2>
+          <p class="section-subtitle">Open formats, encryption, and perpetual licensing.</p>
+        </div>
+
+        <div class="faq-accordion-box">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Why not just use Apple's built-in Time Machine?</span>
+              <span class="faq-chevron"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-answer">
+              <p>Time Machine uses fragile sparsebundles that frequently corrupt over Wi-Fi or NAS networks. It has no client-side encryption for S3 cloud backends, no deduplication across multiple machines, and no hardware telemetry to warn you when your backup drive is physically dying.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>What happens to my backups if dewDrive goes out of business?</span>
+              <span class="faq-chevron"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-answer">
+              <p><strong>Nothing happens to your data.</strong> dewDrive repositories conform strictly to open-source Restic and Kopia specifications. You can open any terminal on Mac, Linux, or Windows and restore every snapshot for free using standard open-source tools without dewDrive installed.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How does the perpetual license work?</span>
+              <span class="faq-chevron"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-answer">
+              <p>You pay once and own that major version forever. It includes one year of free feature updates and perpetual bug fixes. Your app never stops working, and your backups never expire.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I use my existing Synology NAS or Thunderbolt drive?</span>
+              <span class="faq-chevron"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. dewDrive supports local external drives, SMB/NFS network attached shares, and direct S3 cloud storage simultaneously. You can maintain a local 3-2-1 backup strategy within a single unified dashboard.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         11. PRE-FOOTER CALL TO ACTION (UNIVERSAL DMG DOWNLOAD)
+         ==================================================================== -->
+    <section class="prefooter-cta-section" id="download" data-animate="fade-up">
+      <div class="container">
+        <div class="prefooter-card apple-glow-card apple-tilt-card">
+          <div class="prefooter-glow"></div>
+          <div class="prefooter-content">
+            <span class="section-tag">BEGIN YOUR BACKUP SOVEREIGNTY</span>
+            <h2 class="prefooter-title">Serious storage.<br>Effortless recovery.</h2>
+            <p class="prefooter-sub">
+              Try every feature free for 30 days. No credit card required.
+            </p>
+            
+            <div class="prefooter-actions">
+              <button class="btn btn-primary btn-lg download-trigger-btn" id="prefooter-download-btn">
+                <svg class="apple-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.74 1.04-1.77.92-2.81-.9.04-1.99.6-2.63 1.34-.57.65-1.07 1.7-1 2.76 1.01.08 2.03-.52 2.71-1.29z"/>
+                </svg>
+                <span>Download for Mac</span>
+                <span class="btn-subtext">Universal DMG · Apple Silicon & Intel</span>
+              </button>
+            </div>
+
+            <!-- Terminal Homebrew Cask Option -->
+            <div class="brew-command-box">
+              <span class="brew-label">Or install via Homebrew Cask:</span>
+              <div class="brew-code-pill">
+                <code>brew install --cask dewdrive</code>
+                <button class="brew-copy-btn" id="brew-copy-btn" title="Copy to clipboard">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="prefooter-meta">
+              <span>Supports macOS 13 Ventura, 14 Sonoma, 15 Sequoia</span>
+              <span>·</span>
+              <span>Universal Binary (M1/M2/M3/M4 & Intel x86_64)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       12. FOOTER
+       ==================================================================== -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand-col">
+        <a href="#" class="brand-logo">
+          <div class="logo-mark">
+            <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="dewDropFoot" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#38BDF8"/>
+                  <stop offset="55%" stop-color="#0EA5E9"/>
+                  <stop offset="100%" stop-color="#0284C7"/>
+                </linearGradient>
+              </defs>
+              <path d="M16 2.5C16 2.5 5.5 13.5 5.5 21C5.5 26.5 10 30 16 30C22 30 26.5 26.5 26.5 21C26.5 13.5 16 2.5 16 2.5Z" fill="url(#dewDropFoot)"/>
+              <path d="M9.8 16.2C9.2 17.5 9.1 19.5 9.7 21C10.1 21.8 10.9 22.8 12 23.4" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M18.6 10.5V22.2M18.6 22.2C18.6 22.2 17.4 23 15.4 23C12.8 23 11 21 11 18.4C11 15.8 12.8 13.8 15.4 13.8C17.4 13.8 18.6 14.6 18.6 14.6" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="brand-name">dewDrive</span>
+          <span class="brand-sub-badge">APFS</span>
+        </a>
+        <p class="footer-tagline">
+          The privacy-first macOS backup and recovery solution. Built on open standards, trusted for life.
+        </p>
+        <div class="footer-system-status">
+          <span class="status-dot green"></span>
+          <span>All Snapshot Systems Operational</span>
+        </div>
+        <p class="copyright-text">&copy; 2026 dewDrive Inc. All rights reserved.</p>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <h4 class="footer-heading">Architecture & Pricing</h4>
+          <ul class="footer-nav">
+            <li><a href="#details-and-price">FastCDC Engine</a></li>
+            <li><a href="#pricing">Perpetual Pricing Studio</a></li>
+            <li><a href="#calculator">Storage Calculator</a></li>
+            <li><a href="#benchmarks">M-Series Benchmarks</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-nav">
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#showcase" data-tab-link="recover">dewRewind Explorer</a></li>
+            <li><a href="#showcase" data-tab-link="monitor">Hardware RMM</a></li>
+            <li><a href="#matrix">Competitive Matrix</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-nav">
+            <li><a href="#resources">Engineering Papers</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#terminal">CLI Reference</a></li>
+            <li><a href="#download" class="download-trigger-btn">Download DMG</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       MODALS & OVERLAYS
+       ==================================================================== -->
+  <!-- Download Modal -->
+  <div class="modal-backdrop hidden" id="download-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <h3>Download dewDrive for Mac</h3>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <p class="modal-desc">
+          Universal DMG package for macOS. Fully compatible with Apple Silicon M1/M2/M3/M4 and Intel processors.
+        </p>
+
+        <div class="arch-selector-grid">
+          <a href="#" class="arch-option-card active" download="dewDrive-AppleSilicon.dmg">
+            <div class="arch-badge">RECOMMENDED</div>
+            <div class="arch-name">Apple Silicon</div>
+            <div class="arch-chips">M1, M2, M3, M4</div>
+            <div class="arch-sub">Hardware AES-256 Accelerated</div>
+          </a>
+
+          <a href="#" class="arch-option-card" download="dewDrive-Intel.dmg">
+            <div class="arch-badge">LEGACY</div>
+            <div class="arch-name">Intel Core</div>
+            <div class="arch-chips">x86_64 Macs</div>
+            <div class="arch-sub">macOS 13 Ventura or newer</div>
+          </a>
+        </div>
+
+        <div class="modal-instructions">
+          <h4>Installation Instructions:</h4>
+          <ol>
+            <li>Open the downloaded <code>dewDrive-v1.4.2.dmg</code> file.</li>
+            <li>Drag the <strong>dewDrive</strong> icon into your <code>Applications</code> folder.</li>
+            <li>Launch dewDrive and follow the prompt to grant <strong>Full Disk Access</strong>.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="modal-done-btn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Command-K (⌘K) Global Navigation Modal -->
+  <div class="cmd-k-backdrop hidden" id="cmd-k-modal">
+    <div class="cmd-k-dialog">
+      <div class="cmd-k-search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="cmd-k-input" placeholder="Type a command or jump to section..." autocomplete="off">
+        <span class="cmd-esc-badge">ESC</span>
+      </div>
+      <div class="cmd-k-results">
+        <div class="cmd-k-group-title">NAVIGATION</div>
+        <div class="cmd-k-item" data-action="details">
+          <span class="item-name">Architecture & Details</span>
+          <span class="item-hint">Chapter 01</span>
+        </div>
+        <div class="cmd-k-item" data-action="pricing">
+          <span class="item-name">Pricing & Perpetual License</span>
+          <span class="item-hint">Chapter 02</span>
+        </div>
+        <div class="cmd-k-item" data-action="how-it-works">
+          <span class="item-name">How It Works (Pipeline)</span>
+          <span class="item-hint">Chapter 03</span>
+        </div>
+        <div class="cmd-k-item" data-action="recover">
+          <span class="item-name">dewRewind Point-in-time Explorer</span>
+          <span class="item-hint">Feature 02</span>
+        </div>
+        <div class="cmd-k-item" data-action="benchmarks">
+          <span class="item-name">Apple Silicon M-Series Benchmarks</span>
+          <span class="item-hint">Benchmarks</span>
+        </div>
+        <div class="cmd-k-item" data-action="monitor">
+          <span class="item-name">Hardware & SSD Health Telemetry</span>
+          <span class="item-hint">Feature 03</span>
+        </div>
+        <div class="cmd-k-item" data-action="philosophy">
+          <span class="item-name">The dewDrive Manifesto</span>
+          <span class="item-hint">Philosophy</span>
+        </div>
+        <div class="cmd-k-item" data-action="faq">
+          <span class="item-name">Frequently Asked Questions</span>
+          <span class="item-hint">FAQ</span>
+        </div>
+        <div class="cmd-k-item" data-action="download">
+          <span class="item-name">Download DMG installer</span>
+          <span class="item-hint">macOS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Article Preview Drawer/Modal -->
+  <div class="modal-backdrop hidden" id="article-modal">
+    <div class="modal-dialog article-reader-dialog">
+      <div class="modal-header">
+        <span class="art-tag" id="art-modal-tag">Architecture</span>
+        <button class="modal-close-btn" id="art-modal-close" aria-label="Close article">&times;</button>
+      </div>
+      <div class="modal-body article-reader-body">
+        <h2 id="art-modal-title" class="reader-title">Why Immutable Backups and Content-Defined Chunking Beat Ransomware</h2>
+        <div class="reader-meta" id="art-modal-meta">6 min read · By Dr. Henrik Lind</div>
+        <div class="reader-text" id="art-modal-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=calm-apple-v9"></script>
+</body>
+</html>
