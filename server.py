@@ -7,9 +7,9 @@ class FastHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
     def end_headers(self):
-        # Enable caching for static images so browser memory/disk cache works instantaneously
+        # Enable responsive caching with must-revalidate so updates show immediately
         if self.path.startswith('/public/images/'):
-            self.send_header('Cache-Control', 'public, max-age=86400, immutable')
+            self.send_header('Cache-Control', 'no-cache, must-revalidate')
         else:
             self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
             self.send_header('Pragma', 'no-cache')

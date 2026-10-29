@@ -13,12 +13,17 @@
   <meta property="og:description" content="Serious storage, effortless recovery. Client-side encrypted snapshots to any storage with zero vendor lock-in.">
   <meta name="theme-color" content="#000000">
 
+  <!-- Favicon / Brand Icon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="public/images/favicon-32.png">
+  <link rel="icon" type="image/svg+xml" href="public/images/logo.svg">
+  <link rel="apple-touch-icon" href="public/images/logo-512.png">
+
   <!-- Sora & JetBrains Mono Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="styles.css?v=calm-apple-v9">
+  <link rel="stylesheet" href="styles.css?v=calm-apple-v10">
 </head>
 <body>
 
@@ -40,18 +45,7 @@
       <div class="nav-left">
         <a href="#" class="brand-logo" id="nav-brand-logo">
           <div class="logo-mark">
-            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="dewDropNav" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#38BDF8"/>
-                  <stop offset="55%" stop-color="#0EA5E9"/>
-                  <stop offset="100%" stop-color="#0284C7"/>
-                </linearGradient>
-              </defs>
-              <path d="M16 2.5C16 2.5 5.5 13.5 5.5 21C5.5 26.5 10 30 16 30C22 30 26.5 26.5 26.5 21C26.5 13.5 16 2.5 16 2.5Z" fill="url(#dewDropNav)"/>
-              <path d="M9.8 16.2C9.2 17.5 9.1 19.5 9.7 21C10.1 21.8 10.9 22.8 12 23.4" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M18.6 10.5V22.2M18.6 22.2C18.6 22.2 17.4 23 15.4 23C12.8 23 11 21 11 18.4C11 15.8 12.8 13.8 15.4 13.8C17.4 13.8 18.6 14.6 18.6 14.6" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="public/images/logo.png" srcset="public/images/logo-512.png 2x" alt="dewDrive logo" class="brand-logo-img">
           </div>
           <span class="brand-name">dewDrive</span>
         </a>
@@ -87,7 +81,7 @@
   <main>
     <!-- ====================================================================
          1. SCROLL-BASED 3D IMAGE SEQUENCE HERO SECTION
-         (Apple-grade 300-frame scrollytelling canvas with synced narrative cards)
+         (Apple-grade 204-frame scrollytelling canvas with synced narrative cards)
          ==================================================================== -->
     <section class="hero-scroll-track" id="hero">
       <div class="hero-sticky-stage">
@@ -97,6 +91,8 @@
         
         <!-- Dark Atmospheric Vignette for Apple Keynote Contrast -->
         <div class="hero-canvas-vignette"></div>
+
+
 
         <!-- Grand Opening Hero Header (Scroll 0% - 15%, dissolves gracefully on scroll) -->
         <div class="hero-intro-header" id="hero-intro-header">
@@ -137,56 +133,92 @@
 
         <!-- Floating Keynote Feature Deck (Bottom-Left: Leaves 3D Center 100% Free) -->
         <div class="hero-keynote-deck" id="hero-keynote-deck">
-          <!-- Step 1: FastCDC Rabin Chunking -->
-          <div class="keynote-card" data-step="1">
-            <div class="keynote-eyebrow">
-              <span class="eyebrow-accent">ACT 01</span>
-              <span class="eyebrow-sep">/</span>
-              <span>FASTCDC CHUNKING PIPELINE</span>
+          
+          <!-- Keynote Header Row: Engineering Papers & Guides -->
+          <div class="keynote-deck-header">
+            <div class="deck-tag-row">
+              <span class="deck-tag-badge">ENGINEERING PAPERS & GUIDES</span>
+              <a href="#resources" class="deck-more-link" id="deck-more-whitepapers">
+                <span>Read all whitepapers</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
             </div>
-            <h3 class="keynote-title">Fluid Content Chunking.</h3>
-            <p class="keynote-desc">
-              Files are sliced along dynamic Rabin fingerprint boundaries. When you modify an 8K video or Xcode project, only the exact changed byte delta uploads.
-            </p>
-            <div class="keynote-chips">
-              <span class="chip-item"><span class="chip-dot"></span>Up to 72% Bandwidth Saved</span>
-              <span class="chip-item muted">Sub-file Rabin Hashing</span>
-            </div>
-          </div>
-
-          <!-- Step 2: Zero-Knowledge Secure Enclave -->
-          <div class="keynote-card" data-step="2">
-            <div class="keynote-eyebrow">
-              <span class="eyebrow-accent">ACT 02</span>
-              <span class="eyebrow-sep">/</span>
-              <span>ZERO-KNOWLEDGE ENCLAVE</span>
-            </div>
-            <h3 class="keynote-title">Keys Stay on Your Mac.</h3>
-            <p class="keynote-desc">
-              End-to-end encryption anchored strictly inside Apple Silicon's hardware Secure Enclave using Argon2id. No cloud provider or employee can read a byte.
-            </p>
-            <div class="keynote-chips">
-              <span class="chip-item"><span class="chip-dot emerald"></span>Argon2id Hardware KDF</span>
-              <span class="chip-item muted">AES-256-GCM / Poly1305</span>
+            <h4 class="deck-main-title">Deep Technical Resources</h4>
+            <div class="deck-pills-nav" id="hero-paper-pills">
+              <button class="deck-pill-tab active" type="button" data-step="1">1. Architecture</button>
+              <button class="deck-pill-tab" type="button" data-step="2">2. Hardware RMM</button>
+              <button class="deck-pill-tab" type="button" data-step="3">3. Quickstart</button>
+              <button class="deck-pill-tab" type="button" data-step="4">4. Company Story</button>
             </div>
           </div>
 
-          <!-- Step 3: Sovereign Multi-Cloud Mesh -->
-          <div class="keynote-card" data-step="3">
+          <!-- Paper 1: Architecture -->
+          <article class="keynote-card active article-card" data-step="1" data-article="1" title="Click to read full whitepaper">
             <div class="keynote-eyebrow">
-              <span class="eyebrow-accent">ACT 03</span>
-              <span class="eyebrow-sep">/</span>
-              <span>SOVEREIGN MULTI-CLOUD</span>
+              <span class="eyebrow-accent">Architecture</span>
+              <span class="eyebrow-sep">·</span>
+              <span>6 min read</span>
             </div>
-            <h3 class="keynote-title">Any Cloud. Zero Lock-in.</h3>
+            <h3 class="keynote-title">Why Immutable Backups and Content-Defined Chunking Beat Ransomware</h3>
             <p class="keynote-desc">
-              Direct TLS streams to Wasabi, Backblaze B2, Cloudflare R2, AWS S3, or local 10GbE NAS. Immutable Compliance Mode Object Lock eliminates ransomware.
+              A deep technical dive into FastCDC algorithms, S3 Object Lock compliance, and why traditional incremental backups fail modern extortion attacks.
             </p>
-            <div class="keynote-chips">
-              <span class="chip-item"><span class="chip-dot purple"></span>100% Open Restic & Kopia Specs</span>
-              <span class="chip-item muted">Direct TLS Streaming</span>
+            <div class="keynote-card-footer">
+              <span class="art-author">Dr. Henrik Lind · Security Research</span>
+              <span class="art-arrow">&rarr;</span>
             </div>
-          </div>
+          </article>
+
+          <!-- Paper 2: Hardware RMM -->
+          <article class="keynote-card article-card" data-step="2" data-article="2" title="Click to read full whitepaper">
+            <div class="keynote-eyebrow">
+              <span class="eyebrow-accent">Hardware RMM</span>
+              <span class="eyebrow-sep">·</span>
+              <span>8 min read</span>
+            </div>
+            <h3 class="keynote-title">Detecting Silent SSD Degradation Before Catastrophic Drive Failure</h3>
+            <p class="keynote-desc">
+              How dewDrive parses raw NVMe SMART registers to alert you when wear leveling indicators and reallocated flash cells exceed safe thresholds.
+            </p>
+            <div class="keynote-card-footer">
+              <span class="art-author">Elena Rostova · Systems Engineering</span>
+              <span class="art-arrow">&rarr;</span>
+            </div>
+          </article>
+
+          <!-- Paper 3: Quickstart -->
+          <article class="keynote-card article-card" data-step="3" data-article="3" title="Click to read full whitepaper">
+            <div class="keynote-eyebrow">
+              <span class="eyebrow-accent">Quickstart</span>
+              <span class="eyebrow-sep">·</span>
+              <span>Docs · 2 min</span>
+            </div>
+            <h3 class="keynote-title">Back up your first Mac in under two minutes</h3>
+            <p class="keynote-desc">
+              Step-by-step walk-through to configure your first S3 bucket or external drive, generate your recovery key, and initiate an automated snapshot schedule.
+            </p>
+            <div class="keynote-card-footer">
+              <span class="art-author">dewDrive Docs Team</span>
+              <span class="art-arrow">&rarr;</span>
+            </div>
+          </article>
+
+          <!-- Paper 4: Company Story -->
+          <article class="keynote-card article-card" data-step="4" data-article="4" title="Click to read full whitepaper">
+            <div class="keynote-eyebrow">
+              <span class="eyebrow-accent">Company Story</span>
+              <span class="eyebrow-sep">·</span>
+              <span>Timeline</span>
+            </div>
+            <h3 class="keynote-title">From 2009 to today: the story behind dewDrive</h3>
+            <p class="keynote-desc">
+              Why we got tired of brittle Time Machine sparsebundles corrupted over Wi-Fi, and built the native tool Mac power users deserved.
+            </p>
+            <div class="keynote-card-footer">
+              <span class="art-author">Marcus Vance · Founder</span>
+              <span class="art-arrow">&rarr;</span>
+            </div>
+          </article>
         </div>
 
         <!-- Real-Time Cinematic HUD Pill (Bottom Right: Interactive Controller) -->
@@ -197,8 +229,8 @@
               <svg class="hud-icon pause-icon hidden" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
             </button>
             <div class="hud-info">
-              <span class="hud-title" id="hero-hud-act-name">KEYNOTE OVERVIEW</span>
-              <span class="hud-frame-num" id="hero-frame-counter">FRAME 002 / 300</span>
+              <span class="hud-title" id="hero-hud-act-name">ARCHITECTURE · FASTCDC</span>
+              <span class="hud-frame-num" id="hero-frame-counter">FRAME 001 / 204</span>
             </div>
             <span class="hud-percent" id="hero-hud-percent">0%</span>
           </div>
@@ -206,9 +238,10 @@
             <div class="hud-track" id="hero-scrub-track">
               <div class="hud-fill" id="hero-hud-progress"></div>
               <div class="hud-thumb" id="hero-hud-thumb"></div>
-              <span class="hud-tick" data-target="0.18" style="left: 18%;" title="Jump to Act 01: FastCDC"></span>
-              <span class="hud-tick" data-target="0.46" style="left: 46%;" title="Jump to Act 02: Enclave"></span>
-              <span class="hud-tick" data-target="0.72" style="left: 72%;" title="Jump to Act 03: Multi-Cloud"></span>
+              <span class="hud-tick" data-target="0.15" style="left: 15%;" title="Jump to Paper 1: Architecture"></span>
+              <span class="hud-tick" data-target="0.42" style="left: 42%;" title="Jump to Paper 2: Hardware RMM"></span>
+              <span class="hud-tick" data-target="0.70" style="left: 70%;" title="Jump to Paper 3: Quickstart Docs"></span>
+              <span class="hud-tick" data-target="0.90" style="left: 90%;" title="Jump to Paper 4: Company Story"></span>
             </div>
           </div>
         </div>
@@ -1199,18 +1232,7 @@
       <div class="footer-brand-col">
         <a href="#" class="brand-logo">
           <div class="logo-mark">
-            <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="dewDropFoot" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#38BDF8"/>
-                  <stop offset="55%" stop-color="#0EA5E9"/>
-                  <stop offset="100%" stop-color="#0284C7"/>
-                </linearGradient>
-              </defs>
-              <path d="M16 2.5C16 2.5 5.5 13.5 5.5 21C5.5 26.5 10 30 16 30C22 30 26.5 26.5 26.5 21C26.5 13.5 16 2.5 16 2.5Z" fill="url(#dewDropFoot)"/>
-              <path d="M9.8 16.2C9.2 17.5 9.1 19.5 9.7 21C10.1 21.8 10.9 22.8 12 23.4" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M18.6 10.5V22.2M18.6 22.2C18.6 22.2 17.4 23 15.4 23C12.8 23 11 21 11 18.4C11 15.8 12.8 13.8 15.4 13.8C17.4 13.8 18.6 14.6 18.6 14.6" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="public/images/logo.png" srcset="public/images/logo-512.png 2x" alt="dewDrive logo" class="brand-logo-img">
           </div>
           <span class="brand-name">dewDrive</span>
           <span class="brand-sub-badge">APFS</span>

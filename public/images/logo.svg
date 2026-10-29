@@ -1,0 +1,14 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dewDropGrad" x1="100" y1="2" x2="100" y2="198" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="55%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer Droplet Body -->
+  <path d="M100 2 C100 2 33 80 33 134 C33 171 63 198 100 198 C137 198 167 171 167 134 C167 80 100 2 100 2 Z" fill="url(#dewDropGrad)"/>
+  <!-- Authentic Letter 'd' with circular bowl and straight vertical ascender -->
+  <path d="M128 65 V165 M128 165 C128 165 120 166.5 98.5 166.5 C80.5 166.5 66 152 66 134 C66 116 80.5 101.5 98.5 101.5 C120 101.5 128 102.5 128 102.5" 
+        stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

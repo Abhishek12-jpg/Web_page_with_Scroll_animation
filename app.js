@@ -996,8 +996,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const hudThumb = document.getElementById('hero-hud-thumb');
     const hudTicks = document.querySelectorAll('.hud-tick');
 
-    const START_FRAME = 2; // Starts directly at Frame 2 (Photo 2 start state)
-    const TOTAL_FRAMES = 300;
+    // Engineering Papers Deck Nav Pills
+    const paperPills = document.querySelectorAll('.deck-pill-tab');
+
+    const START_FRAME = 1; // Starts at Frame 1 (dewDrive studio intro)
+    const TOTAL_FRAMES = 204;
     const FRAME_NATURAL_W = 1920;
     const FRAME_NATURAL_H = 1080;
 
@@ -1020,7 +1023,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let cachedTrackTop = 0;
 
     function framePath(idx) {
-      return 'public/images/herosection/ezgif-frame-' + String(idx).padStart(3, '0') + '.jpg';
+      return 'public/images/herosection/ezgif-frame-' + String(idx).padStart(3, '0') + '.png';
     }
 
     // ── High-DPI Canvas Sizing & Precomputed Crop Math ──
@@ -1204,14 +1207,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Start Up: Tiered Preloader ──
+    // Tier 1: Immediately preload intro window frames (1 to 35) with high priority
     for (let f = START_FRAME; f <= Math.min(TOTAL_FRAMES, START_FRAME + 35); f++) {
       enqueueFrame(f, true);
     }
-    for (let f = START_FRAME + 40; f <= TOTAL_FRAMES; f += 5) {
+    // Tier 2: Stride across remaining frames every 4 frames for swift scrubbing readiness
+    for (let f = START_FRAME + 36; f <= TOTAL_FRAMES; f += 4) {
       enqueueFrame(f, false);
     }
+    // Tier 3: Preload remaining intermediate frames
     for (let f = START_FRAME + 36; f <= TOTAL_FRAMES; f++) {
-      if (f % 5 !== 0) {
+      if ((f - START_FRAME - 36) % 4 !== 0) {
         enqueueFrame(f, false);
       }
     }
@@ -1238,14 +1244,14 @@ document.addEventListener('DOMContentLoaded', () => {
         hudPercent.textContent = Math.round(percentVal) + '%';
       }
       if (hudActName) {
-        if (progressRatio < 0.16) {
-          hudActName.textContent = 'KEYNOTE OVERVIEW';
-        } else if (progressRatio < 0.46) {
-          hudActName.textContent = 'ACT 01 · FASTCDC PIPELINE';
-        } else if (progressRatio < 0.72) {
-          hudActName.textContent = 'ACT 02 · SECURE ENCLAVE';
+        if (progressRatio < 0.25) {
+          hudActName.textContent = 'PAPER 01 · FASTCDC & IMMUTABILITY';
+        } else if (progressRatio < 0.52) {
+          hudActName.textContent = 'PAPER 02 · HARDWARE RMM & SSD';
+        } else if (progressRatio < 0.78) {
+          hudActName.textContent = 'PAPER 03 · QUICKSTART GUIDE';
         } else {
-          hudActName.textContent = 'ACT 03 · SOVEREIGN MULTI-CLOUD';
+          hudActName.textContent = 'PAPER 04 · FOUNDER TIMELINE';
         }
       }
     }
@@ -1314,11 +1320,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Keynote Cards: synced to narrative acts
-      let activeStep = -1;
-      if (progress >= 0.18 && progress < 0.46) activeStep = 1;
-      else if (progress >= 0.46 && progress < 0.72) activeStep = 2;
-      else if (progress >= 0.72 && progress <= 0.95) activeStep = 3;
+      // Keynote Cards & Engineering Papers: synced to narrative acts
+      let activeStep = 1;
+      if (progress < 0.25) activeStep = 1;
+      else if (progress < 0.52) activeStep = 2;
+      else if (progress < 0.78) activeStep = 3;
+      else activeStep = 4;
 
       keynoteCards.forEach(function(card) {
         const step = parseInt(card.dataset.step, 10);
@@ -1328,6 +1335,13 @@ document.addEventListener('DOMContentLoaded', () => {
           card.classList.remove('active');
         }
       });
+
+      if (paperPills) {
+        paperPills.forEach(function(pill) {
+          const step = parseInt(pill.dataset.step, 10);
+          pill.classList.toggle('active', step === activeStep);
+        });
+      }
     }
 
     // ── Interactive Timeline Scrubber (Click & Drag) ──
@@ -1401,13 +1415,27 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // ── Keynote Cards Click to Focus ──
+    // ── Engineering Papers Pill Tabs (Direct Jumps) ──
+    if (paperPills) {
+      paperPills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const step = parseInt(pill.dataset.step, 10);
+          if (step === 1) seekToProgress(0.12);
+          else if (step === 2) seekToProgress(0.38);
+          else if (step === 3) seekToProgress(0.65);
+          else if (step === 4) seekToProgress(0.88);
+        });
+      });
+    }
+
+    // ── Keynote Cards Click: Read Full Whitepaper in Reader Modal ──
     keynoteCards.forEach(card => {
       card.addEventListener('click', () => {
-        const step = parseInt(card.dataset.step, 10);
-        if (step === 1) seekToProgress(0.25);
-        else if (step === 2) seekToProgress(0.55);
-        else if (step === 3) seekToProgress(0.80);
+        const articleId = card.dataset.article;
+        if (articleId && typeof openArticleModal === 'function') {
+          openArticleModal(articleId);
+        }
       });
     });
 
